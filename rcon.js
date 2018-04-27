@@ -9,6 +9,7 @@ let rcon = RCON({
 var logging = process.env.RCONLOGGING || false;
 var interval = process.env.RCONINT || 5000;
 var debug = process.env.DEBUG || false;
+var db = process.env.DB || "srcds_db";
 
 function dbg(msg) {
 	if(debug) {
@@ -39,7 +40,7 @@ function pingServer() {
 					dbg("Logging is enabled, attempting write.");
 					// Cast to floats/ints otherwise influx will throw a fit
 					for(var i = 0; i < 8; i++) { stat[i] = Number(stat[i]); }
-					dbc.dbInsert(stat);
+					dbc.dbInsert(stat,db);
 				}
 				rcon.disconnect();
 			});

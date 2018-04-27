@@ -1,5 +1,5 @@
 module.exports = {
-	dbInsert: function(stat) {
+	dbInsert: function(stat,db) {
 		const Influx = require('influx');
 		
 		// Connect to the actual DB, and describe
@@ -8,7 +8,7 @@ module.exports = {
 		const influx = new Influx.InfluxDB({
 			//host: 'ttt.throneridge.com',
 			host: 'localhost',
-			database: 'srcds_db',
+			database: db,
 			schema: [{
 				measurement: 'srcds',
 				fields: {
